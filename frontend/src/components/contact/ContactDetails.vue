@@ -14,8 +14,8 @@ const contactChannels = [
     subtitle: 'Direct line',
     description: 'Weekdays 9am–5pm GMT.',
     icon: 'mdi-phone-outline',
-    value: '+44 7454 320338',
-    href: 'tel:+447454320338',
+    value: '0800 2922472',
+    href: 'tel:08002922472',
     accent: 'secondary'
   },
   {

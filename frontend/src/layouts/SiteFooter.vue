@@ -12,14 +12,14 @@ const currentYear = new Date().getFullYear()
           <span class="footer__brand">© {{ currentYear }} WebEssex</span>
           <div class="footer__links">
             <a
-              href="https://www.facebook.com/WebEssex"
+              href="https://www.facebook.com/profile.php?id=61582622033324"
               target="_blank"
               rel="noopener"
             >
               Facebook
             </a>
             <a
-              href="https://www.linkedin.com/company/webessex"
+              href="https://www.linkedin.com/company/webessex/"
               target="_blank"
               rel="noopener"
             >

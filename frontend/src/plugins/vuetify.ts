@@ -19,7 +19,8 @@ const wesLight = {
     warning: '#f97316',
     error: '#dc2626',
     'on-background': '#1f2933',
-    'on-surface': '#1f2933'
+    'on-surface': '#1f2933',
+    'on-primary': '#ffffff'
   }
 }
 
@@ -37,7 +38,8 @@ const wesDark = {
     warning: '#fb923c',
     error: '#f87171',
     'on-background': '#f8fafc',
-    'on-surface': '#f8fafc'
+    'on-surface': '#f8fafc',
+    'on-primary': '#ffffff'
   }
 }
 
