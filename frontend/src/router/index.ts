@@ -1,4 +1,5 @@
-import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
+import type { RouteLocationNormalizedLoaded, RouteRecordRaw, Router } from 'vue-router'
+import type { ActiveHeadEntry, VueHeadClient } from '@unhead/vue'
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -19,7 +20,40 @@ declare module 'vue-router' {
   }
 }
 
-const routes: RouteRecordRaw[] = [
+const envSiteUrl = (import.meta.env.VITE_SITE_URL as string | undefined)?.trim()
+const SITE_URL = envSiteUrl ? envSiteUrl.replace(/\/+$/, '') : undefined
+
+const ensureLeadingSlash = (value: string) => (value.startsWith('/') ? value : `/${value}`)
+const isAbsoluteUrl = (value: string) => /^[a-z][a-z\d+\-.]*:\/\//i.test(value)
+
+const resolveBaseOrigin = () => SITE_URL ?? (typeof window !== 'undefined' ? window.location.origin : undefined)
+
+const resolveUrl = (raw?: string, fallbackPath?: string) => {
+  const candidate = raw ?? fallbackPath ?? ''
+  if (!candidate) return undefined
+
+  if (isAbsoluteUrl(candidate)) {
+    return candidate
+  }
+
+  const base = resolveBaseOrigin()
+  if (!base) return undefined
+
+  return `${base}${ensureLeadingSlash(candidate)}`
+}
+
+const resolveCanonicalUrl = (route: RouteLocationNormalizedLoaded, raw?: string) =>
+  resolveUrl(raw, route.path)
+
+const resolveAssetUrl = (raw?: string) => {
+  if (!raw) return undefined
+  if (isAbsoluteUrl(raw)) return raw
+  const base = resolveBaseOrigin()
+  if (!base) return raw
+  return `${base}${ensureLeadingSlash(raw)}`
+}
+
+export const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'home',
@@ -42,16 +76,17 @@ const routes: RouteRecordRaw[] = [
           'UX agency UK',
           'web development Essex'
         ],
-        canonical: 'https://www.webessex.dev/',
+        canonical: '/',
         ogTitle: 'WebEssex | Digital Design & Web Development in Essex',
         ogDescription:
           'WebEssex is a design-led digital agency crafting high-performing websites, brand experiences, and product launches for ambitious teams across Essex and the UK.',
         ogType: 'website',
-        ogImage: 'https://www.webessex.dev/social/home.jpg',
+        ogImage: '/social/home.png',
         twitterCard: 'summary_large_image',
         twitterTitle: 'WebEssex | Digital Design & Web Development in Essex',
         twitterDescription:
-          'Design, engineering, and product strategy under one roof. Launch faster with WebEssex.'
+          'Design, engineering, and product strategy under one roof. Launch faster with WebEssex.',
+        twitterImage: '/social/home.png'
       }
     }
   },
@@ -69,14 +104,15 @@ const routes: RouteRecordRaw[] = [
       ],
       seo: {
         keywords: ['WebEssex team', 'about WebEssex', 'digital studio Essex', 'product team UK'],
-        canonical: 'https://www.webessex.dev/about',
+        canonical: '/about',
         ogTitle: 'About WebEssex',
         ogDescription: 'Meet the team behind WebEssex and learn how we deliver measurable, design-led launches.',
         ogType: 'profile',
-        ogImage: 'https://www.webessex.dev/social/about.jpg',
+        ogImage: '/social/about.png',
         twitterCard: 'summary_large_image',
         twitterTitle: 'About WebEssex',
-        twitterDescription: 'Get to know the multidisciplinary team building products for ambitious brands.'
+        twitterDescription: 'Get to know the multidisciplinary team building products for ambitious brands.',
+        twitterImage: '/social/about.png'
       }
     }
   },
@@ -101,15 +137,16 @@ const routes: RouteRecordRaw[] = [
           'Vue engineering agency',
           'growth partnerships'
         ],
-        canonical: 'https://www.webessex.dev/services',
+        canonical: '/services',
         ogTitle: 'WebEssex Services',
         ogDescription:
           'Explore strategy workshops, brand-rich design, Vue engineering, and growth partnerships built for ambitious teams.',
         ogType: 'website',
-        ogImage: 'https://www.webessex.dev/social/services.jpg',
+        ogImage: '/social/services.png',
         twitterCard: 'summary_large_image',
         twitterTitle: 'WebEssex Services',
-        twitterDescription: 'From discovery to delivery, WebEssex is your end-to-end product partner.'
+        twitterDescription: 'From discovery to delivery, WebEssex is your end-to-end product partner.',
+        twitterImage: '/social/services.png'
       }
     }
   },
@@ -128,106 +165,165 @@ const routes: RouteRecordRaw[] = [
       ],
       seo: {
         keywords: ['Contact WebEssex', 'book discovery workshop', 'Essex digital agency contact'],
-        canonical: 'https://www.webessex.dev/contact',
+        canonical: '/contact',
         ogTitle: 'Contact WebEssex',
         ogDescription:
           'Book a workshop, request a bespoke engagement, or talk to the WebEssex team about your next launch.',
         ogType: 'website',
-        ogImage: 'https://www.webessex.dev/social/contact.jpg',
+        ogImage: '/social/contact.png',
         twitterCard: 'summary_large_image',
         twitterTitle: 'Contact WebEssex',
-        twitterDescription: 'Say hello—let’s design, build, and launch your next experience.'
+        twitterDescription: 'Say hello—let’s design, build, and launch your next experience.',
+        twitterImage: '/social/contact.png'
       }
     }
   }
 ]
 
-const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes
-})
-
 const DEFAULT_TITLE = 'WebEssex'
-const SEO_ATTRIBUTES: Record<string, string> = {
-  ogTitle: 'property',
-  ogDescription: 'property',
-  ogImage: 'property',
-  ogType: 'property',
-  twitterTitle: 'name',
-  twitterDescription: 'name',
-  twitterImage: 'name',
-  twitterCard: 'name'
-}
-const OG_PREFIXES: Record<string, string> = {
-  ogTitle: 'og:title',
-  ogDescription: 'og:description',
-  ogImage: 'og:image',
-  ogType: 'og:type'
-}
-const TWITTER_NAMES: Record<string, string> = {
-  twitterTitle: 'twitter:title',
-  twitterDescription: 'twitter:description',
-  twitterImage: 'twitter:image',
-  twitterCard: 'twitter:card'
+const DEFAULT_DESCRIPTION =
+  'WebEssex is a design-led digital agency delivering websites, product launches, and growth partnerships for ambitious teams.'
+const DEFAULT_OG_TYPE = 'website'
+const DEFAULT_TWITTER_CARD = 'summary_large_image'
+const ABSOLUTE_URL_KEYS = new Set(['ogImage', 'twitterImage'])
+const SEO_ATTRIBUTE_MAP: Record<string, { attribute: 'property' | 'name'; value: string }> = {
+  ogTitle: { attribute: 'property', value: 'og:title' },
+  ogDescription: { attribute: 'property', value: 'og:description' },
+  ogImage: { attribute: 'property', value: 'og:image' },
+  ogType: { attribute: 'property', value: 'og:type' },
+  twitterTitle: { attribute: 'name', value: 'twitter:title' },
+  twitterDescription: { attribute: 'name', value: 'twitter:description' },
+  twitterImage: { attribute: 'name', value: 'twitter:image' },
+  twitterCard: { attribute: 'name', value: 'twitter:card' }
 }
 
-router.afterEach((to) => {
-  document.title = to.meta.title ?? DEFAULT_TITLE
+type HeadPayload = Record<string, any>
+type HeadMetaEntry = Record<string, string>
+type HeadLinkEntry = Record<string, string>
 
-  document
-    .querySelectorAll('meta[data-router-controlled]')
-    .forEach((tag) => tag.parentNode?.removeChild(tag))
+const createMetaEntry = (entry: Record<string, string>, keyHint?: string): HeadMetaEntry => {
+  const dedupeKey = keyHint ?? entry.name ?? entry.property ?? entry.rel ?? undefined
+  return dedupeKey ? { ...entry, key: dedupeKey } : { ...entry }
+}
 
-  const metaTags = to.meta.metaTags ?? []
-  metaTags.forEach((tagDef) => {
-    const tag = document.createElement('meta')
-    Object.entries(tagDef).forEach(([key, value]) => {
-      tag.setAttribute(key, value)
-    })
-    tag.setAttribute('data-router-controlled', '')
-    document.head.appendChild(tag)
-  })
+const buildHeadFromRoute = (route: RouteLocationNormalizedLoaded): HeadPayload => {
+  const title = route.meta.title ?? DEFAULT_TITLE
+  const head: HeadPayload = { title }
 
-  const canonicalLink = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"][data-router-controlled]')
-  if (canonicalLink) {
-    canonicalLink.remove()
+  const metaEntries: HeadMetaEntry[] = []
+  const linkEntries: HeadLinkEntry[] = []
+  const metaKeys = new Set<string>()
+  const linkKeys = new Set<string>()
+
+  const addMetaEntry = (entry: Record<string, string>, keyHint?: string) => {
+    const dedupeKey = keyHint ?? entry.name ?? entry.property ?? entry.rel ?? undefined
+    if (dedupeKey && metaKeys.has(dedupeKey)) return
+    if (dedupeKey) metaKeys.add(dedupeKey)
+    metaEntries.push(createMetaEntry(entry, keyHint))
   }
 
-  if (to.meta.seo?.canonical) {
-    const link = document.createElement('link')
-    link.setAttribute('rel', 'canonical')
-    link.setAttribute('href', to.meta.seo.canonical)
-    link.setAttribute('data-router-controlled', '')
-    document.head.appendChild(link)
-  }
-
-  const seo = to.meta.seo ?? {}
-
-  if (seo.keywords) {
-    const keywordsValue = Array.isArray(seo.keywords) ? seo.keywords.join(', ') : seo.keywords
-    if (keywordsValue) {
-      const tag = document.createElement('meta')
-      tag.setAttribute('name', 'keywords')
-      tag.setAttribute('content', keywordsValue)
-      tag.setAttribute('data-router-controlled', '')
-      document.head.appendChild(tag)
+  const addLinkEntry = (entry: HeadLinkEntry, keyHint?: string) => {
+    const dedupeKey = keyHint ?? (entry.key as string | undefined) ?? entry.rel ?? entry.href ?? undefined
+    if (dedupeKey && linkKeys.has(dedupeKey)) return
+    if (dedupeKey) {
+      linkKeys.add(dedupeKey)
+      linkEntries.push({ ...entry, key: dedupeKey })
+    } else {
+      linkEntries.push({ ...entry })
     }
   }
 
-  Object.entries(seo).forEach(([key, value]) => {
+  const metaTags = route.meta.metaTags ?? []
+  let metaDescriptionContent: string | undefined
+  metaTags.forEach((tagDef) => {
+    if (tagDef.name === 'description' && tagDef.content) {
+      metaDescriptionContent = tagDef.content
+    }
+    addMetaEntry(tagDef)
+  })
+
+  const rawSeo = route.meta.seo ?? {}
+  const fallbackDescription =
+    rawSeo.ogDescription ?? metaDescriptionContent ?? DEFAULT_DESCRIPTION
+
+  const normalizedSeo = {
+    ...rawSeo,
+    ogTitle: rawSeo.ogTitle ?? title,
+    ogDescription: rawSeo.ogDescription ?? fallbackDescription,
+    ogType: rawSeo.ogType ?? DEFAULT_OG_TYPE,
+    twitterTitle: rawSeo.twitterTitle ?? rawSeo.ogTitle ?? title,
+    twitterDescription: rawSeo.twitterDescription ?? rawSeo.ogDescription ?? fallbackDescription,
+    twitterCard: rawSeo.twitterCard ?? DEFAULT_TWITTER_CARD,
+    twitterImage: rawSeo.twitterImage ?? rawSeo.ogImage
+  }
+
+  const canonical = resolveCanonicalUrl(route, normalizedSeo.canonical)
+
+  if (canonical) {
+    addLinkEntry({ rel: 'canonical', href: canonical }, 'canonical')
+    addMetaEntry({ property: 'og:url', content: canonical }, 'og:url')
+  }
+
+  const keywords = normalizedSeo.keywords
+  if (keywords && (Array.isArray(keywords) ? keywords.length : keywords)) {
+    const content = Array.isArray(keywords) ? keywords.join(', ') : keywords
+    addMetaEntry({ name: 'keywords', content }, 'keywords')
+  }
+
+  Object.entries(normalizedSeo).forEach(([key, value]) => {
     if (!value || key === 'canonical' || key === 'keywords') return
 
-    const attr = SEO_ATTRIBUTES[key]
-    if (!attr) return
+    const mapping = SEO_ATTRIBUTE_MAP[key]
+    if (!mapping) return
 
-    const tag = document.createElement('meta')
-    const propertyName = OG_PREFIXES[key] ?? TWITTER_NAMES[key] ?? key
-    tag.setAttribute(attr, propertyName)
-    const content = Array.isArray(value) ? value.join(', ') : value
-    tag.setAttribute('content', content)
-    tag.setAttribute('data-router-controlled', '')
-    document.head.appendChild(tag)
+    let content = Array.isArray(value) ? value.join(', ') : value
+    if (!content) return
+
+    if (ABSOLUTE_URL_KEYS.has(key)) {
+      const resolved = resolveAssetUrl(content)
+      if (resolved) {
+        content = resolved
+      }
+    }
+
+    addMetaEntry(
+      {
+        [mapping.attribute]: mapping.value,
+        content
+      },
+      mapping.value
+    )
   })
-})
 
-export default router
+  if (!metaKeys.has('description')) {
+    addMetaEntry({ name: 'description', content: fallbackDescription }, 'description')
+  }
+
+  addMetaEntry({ property: 'og:site_name', content: DEFAULT_TITLE }, 'og:site_name')
+
+  if (metaEntries.length) {
+    head.meta = metaEntries
+  }
+
+  if (linkEntries.length) {
+    head.link = linkEntries
+  }
+
+  return head
+}
+
+export const installRouteHead = (router: Router, head: VueHeadClient) => {
+  let activeEntry: ActiveHeadEntry<HeadPayload> | undefined
+
+  const applyHead = (route: RouteLocationNormalizedLoaded) => {
+    const headPayload = buildHeadFromRoute(route)
+    activeEntry?.dispose()
+    activeEntry = head.push(headPayload)
+  }
+
+  router.afterEach((to) => {
+    applyHead(to)
+  })
+
+  applyHead(router.currentRoute.value)
+}

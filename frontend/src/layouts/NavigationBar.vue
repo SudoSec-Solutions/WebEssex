@@ -34,7 +34,7 @@ const themeLabel = computed(() =>
 )
 
 const applyTheme = (themeName: 'wesLight' | 'wesDark') => {
-  theme.global.name.value = themeName
+  theme.change(themeName)
 }
 
 const toggleTheme = () => {

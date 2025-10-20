@@ -1,0 +1,11 @@
+/* TEAM */
+Team: WebEssex
+Site: https://webessex.uk
+Contact: hello@webessex.uk
+Twitter: https://twitter.com/WebEssex
+
+/* TECHNOLOGY */
+Tools: Vue 3, Vite, Vuetify, TypeScript
+
+/* THANKS */
+Thanks: Our clients, collaborators, and the open-source community.

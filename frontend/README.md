@@ -10,15 +10,20 @@ cp .env.example .env.local  # adjust API endpoint if needed
 npm run dev
 ```
 
-Build for production with `npm run build`.
+Build the static site for production (SSR prerender + client bundle) with:
+
+```bash
+npm run build:ssg
+```
 
 ## Environment variables
 
 | Variable | Purpose |
 | -------- | ------- |
 | `VITE_API_BASE_URL` | Base URL for the backend API (defaults to `http://127.0.0.1:8000` in dev). |
+| `VITE_SITE_URL` | Absolute origin used to generate canonical URLs and social tags (e.g. `https://www.webessex.uk`). |
 
-When deploying with Docker, the build-time `API_BASE_URL` argument inside `docker-compose.yml` controls the value used during the static build.
+When deploying with Docker, the build-time `API_BASE_URL` and `SITE_URL` arguments inside `docker-compose.yml` control the values baked into the static build.
 
 ## Contact form
 

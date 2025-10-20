@@ -1,0 +1,4 @@
+Contact: mailto:security@webessex.uk
+Preferred-Languages: en
+Canonical: https://webessex.uk/.well-known/security.txt
+Expires: 2026-01-01

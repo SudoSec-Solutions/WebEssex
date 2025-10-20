@@ -39,6 +39,9 @@ services:
       context: ./frontend
       args:
         API_BASE_URL: https://${BACKEND_HOST}
+        SITE_URL: https://${FRONTEND_HOST}
+    environment:
+      API_BASE_URL: https://${BACKEND_HOST}
     depends_on:
       - backend
     labels:

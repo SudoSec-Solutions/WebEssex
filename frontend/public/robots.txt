@@ -1,2 +1,313 @@
-User-agent: *
-Allow: /
+User-agent: python
+Disallow: /
+
+User-agent: Python-urllib
+Disallow: /
+
+User-agent: python-requests
+Disallow: /
+
+User-agent: python-requests/2.0
+Disallow: /
+
+User-agent: python-requests/2.1
+Disallow: /
+
+User-agent: python-requests/2.2
+Disallow: /
+
+User-agent: python-requests/2.3
+Disallow: /
+
+User-agent: python-requests/2.4
+Disallow: /
+
+User-agent: python-requests/2.5
+Disallow: /
+
+User-agent: python-requests/2.6
+Disallow: /
+
+User-agent: python-requests/2.7
+Disallow: /
+
+User-agent: python-requests/2.8
+Disallow: /
+
+User-agent: python-requests/2.9
+Disallow: /
+
+User-agent: python-requests/2.10
+Disallow: /
+
+User-agent: python-requests/2.11
+Disallow: /
+
+User-agent: python-requests/2.12
+Disallow: /
+
+User-agent: python-requests/2.13
+Disallow: /
+
+User-agent: python-requests/2.14
+Disallow: /
+
+User-agent: python-requests/2.15
+Disallow: /
+
+User-agent: python-requests/2.16
+Disallow: /
+
+User-agent: python-requests/2.17
+Disallow: /
+
+User-agent: python-requests/2.18
+Disallow: /
+
+User-agent: python-requests/2.19
+Disallow: /
+
+User-agent: python-requests/2.20
+Disallow: /
+
+User-agent: python-requests/2.21
+Disallow: /
+
+User-agent: python-requests/2.22
+Disallow: /
+
+User-agent: python-requests/2.23
+Disallow: /
+
+User-agent: python-requests/2.24
+Disallow: /
+
+User-agent: python-requests/2.25
+Disallow: /
+
+User-agent: python-requests/2.26
+Disallow: /
+
+User-agent: python-requests/2.27
+Disallow: /
+
+User-agent: python-requests/2.28
+Disallow: /
+
+User-agent: python-requests/2.29
+Disallow: /
+
+User-agent: python-requests/2.30
+Disallow: /
+
+User-agent: python-requests/2.31
+Disallow: /
+
+User-agent: python-requests/2.32
+Disallow: /
+
+User-agent: python-requests/2.33
+Disallow: /
+
+User-agent: python-requests/2.34
+Disallow: /
+
+User-agent: python-requests/2.35
+Disallow: /
+
+User-agent: python-requests/2.36
+Disallow: /
+
+User-agent: python-requests/2.37
+Disallow: /
+
+User-agent: python-requests/2.38
+Disallow: /
+
+User-agent: python-requests/2.39
+Disallow: /
+
+User-agent: python-requests/2.40
+Disallow: /
+
+User-agent: python-requests/2.41
+Disallow: /
+
+User-agent: python-requests/2.42
+Disallow: /
+
+User-agent: python-requests/2.43
+Disallow: /
+
+User-agent: python-requests/2.44
+Disallow: /
+
+User-agent: python-requests/2.45
+Disallow: /
+
+User-agent: python-requests/2.46
+Disallow: /
+
+User-agent: python-requests/2.47
+Disallow: /
+
+User-agent: python-requests/2.48
+Disallow: /
+
+User-agent: python-requests/2.49
+Disallow: /
+
+User-agent: python-requests/2.50
+Disallow: /
+
+User-agent: python-requests/2.51
+Disallow: /
+
+User-agent: python-requests/2.52
+Disallow: /
+
+User-agent: python-requests/2.53
+Disallow: /
+
+User-agent: python-requests/2.54
+Disallow: /
+
+User-agent: python-requests/2.55
+Disallow: /
+
+User-agent: python-requests/2.56
+Disallow: /
+
+User-agent: python-requests/2.57
+Disallow: /
+
+User-agent: python-requests/2.58
+Disallow: /
+
+User-agent: python-requests/2.59
+Disallow: /
+
+User-agent: python-requests/2.60
+Disallow: /
+
+User-agent: python-requests/2.61
+Disallow: /
+
+User-agent: python-requests/2.62
+Disallow: /
+
+User-agent: python-requests/2.63
+Disallow: /
+
+User-agent: python-requests/2.64
+Disallow: /
+
+User-agent: python-requests/2.65
+Disallow: /
+
+User-agent: python-requests/2.66
+Disallow: /
+
+User-agent: python-requests/2.67
+Disallow: /
+
+User-agent: python-requests/2.68
+Disallow: /
+
+User-agent: python-requests/2.69
+Disallow: /
+
+User-agent: python-requests/2.70
+Disallow: /
+
+User-agent: python-requests/2.71
+Disallow: /
+
+User-agent: python-requests/2.72
+Disallow: /
+
+User-agent: python-requests/2.73
+Disallow: /
+
+User-agent: python-requests/2.74
+Disallow: /
+
+User-agent: python-requests/2.75
+Disallow: /
+
+User-agent: python-requests/2.76
+Disallow: /
+
+User-agent: python-requests/2.77
+Disallow: /
+
+User-agent: python-requests/2.78
+Disallow: /
+
+User-agent: python-requests/2.79
+Disallow: /
+
+User-agent: python-requests/2.80
+Disallow: /
+
+User-agent: python-requests/2.81
+Disallow: /
+
+User-agent: python-requests/2.82
+Disallow: /
+
+User-agent: python-requests/2.83
+Disallow: /
+
+User-agent: python-requests/2.84
+Disallow: /
+
+User-agent: python-requests/2.85
+Disallow: /
+
+User-agent: python-requests/2.86
+Disallow: /
+
+User-agent: python-requests/2.87
+Disallow: /
+
+User-agent: python-requests/2.88
+Disallow: /
+
+User-agent: python-requests/2.89
+Disallow: /
+
+User-agent: python-requests/2.90
+Disallow: /
+
+User-agent: python-requests/2.91
+Disallow: /
+
+User-agent: python-requests/2.92
+Disallow: /
+
+User-agent: python-requests/2.93
+Disallow: /
+
+User-agent: python-requests/2.94
+Disallow: /
+
+User-agent: python-requests/2.95
+Disallow: /
+
+User-agent: python-requests/2.96
+Disallow: /
+
+User-agent: python-requests/2.97
+Disallow: /
+
+User-agent: python-requests/2.98
+Disallow: /
+
+User-agent: python-requests/2.99
+Disallow: /
+
+User-agent: python-requests/3.0
+Disallow: /
+
+Sitemap: https://webessex.uk/sitemap.xml
