@@ -176,12 +176,15 @@ const highlights = [
 .home-highlights__lead {
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  font-size: clamp(0.72rem, 1.8vw, 0.85rem);
   color: rgba(var(--v-theme-on-surface), 0.65);
   padding-inline: 0;
   margin-bottom: 0.75rem;
   text-align: left;
+  line-height: 1.4;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .home-highlights__body {

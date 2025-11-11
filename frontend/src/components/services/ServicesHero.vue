@@ -26,6 +26,18 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  font-size: clamp(0.7rem, 2vw, 0.9rem);
+  line-height: 1.4;
+  text-align: center;
+  white-space: normal;
+  padding-inline: 1rem;
+}
+
+.services-hero__badge :deep(.v-chip__content) {
+  white-space: normal;
+  text-align: center;
+  flex-wrap: wrap;
+  line-height: 1.4;
 }
 
 .services-hero__title {
