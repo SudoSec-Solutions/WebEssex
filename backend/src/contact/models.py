@@ -14,6 +14,7 @@ class TimeStampedModel(models.Model):
 class ContactSubmission(TimeStampedModel):
   name = models.CharField(max_length=150)
   email = models.EmailField()
+  phone = models.CharField(max_length=30, blank=True)
   company = models.CharField(max_length=150, blank=True)
   message = models.TextField()
   subscribe_to_updates = models.BooleanField(default=False)

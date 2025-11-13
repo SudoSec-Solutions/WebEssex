@@ -77,11 +77,11 @@ const toggleExpanded = () => {
         >
           <div class="footer__social">
             <span class="footer__brand footer__brand--desktop">© {{ currentYear }} WebEssex</span>
-            <div class="footer__links">
-              <a
-                href="https://www.facebook.com/profile.php?id=61582622033324"
-                target="_blank"
-                rel="noopener"
+          <div class="footer__links">
+            <a
+              href="https://www.facebook.com/profile.php?id=61582622033324"
+              target="_blank"
+              rel="noopener"
               >
                 Facebook
               </a>

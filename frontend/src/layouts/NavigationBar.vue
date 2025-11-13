@@ -11,9 +11,13 @@ const drawerId = 'mobile-primary-navigation'
 const navigation = [
   { title: 'Home', to: '/' },
   { title: 'Services', to: '/services' },
+  { title: 'Blog', to: '/blog' },
   { title: 'About', to: '/about' },
   { title: 'Contact', to: '/contact' }
 ]
+
+const navPhoneNumber = '08002922472'
+const navPhoneHref = `tel:${navPhoneNumber}`
 
 watch(
   () => route.fullPath,
@@ -93,6 +97,15 @@ onMounted(() => {
           </VBtn>
         </nav>
         <VBtn
+          class="nav-call-btn d-none d-md-inline-flex"
+          color="secondary"
+          variant="flat"
+          :href="navPhoneHref"
+        >
+          <VIcon icon="mdi-phone" start />
+          {{ navPhoneNumber }}
+        </VBtn>
+        <VBtn
           class="nav-theme-btn text-white"
           icon
           variant="text"
@@ -137,6 +150,12 @@ onMounted(() => {
         >
           {{ item.title }}
         </RouterLink>
+      </li>
+      <li class="nav-drawer__item">
+        <a :href="navPhoneHref" class="nav-drawer__link nav-drawer__link--call">
+          <VIcon icon="mdi-phone" start />
+          {{ navPhoneNumber }}
+        </a>
       </li>
       <li class="nav-drawer__item nav-drawer__item--theme">
         <VBtn
@@ -198,6 +217,12 @@ onMounted(() => {
   margin-left: auto;
 }
 
+.nav-call-btn {
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .nav-theme-btn {
   flex-shrink: 0;
 }
@@ -247,6 +272,13 @@ onMounted(() => {
   padding: 0.75rem 1rem;
   border-radius: 0.75rem;
   color: inherit;
+}
+
+.nav-drawer__link--call {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: rgb(var(--v-theme-primary));
 }
 
 .nav-drawer__link:hover,

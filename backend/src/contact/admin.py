@@ -5,9 +5,9 @@ from .models import ContactSubmission, Subscription
 
 @admin.register(ContactSubmission)
 class ContactSubmissionAdmin(admin.ModelAdmin):
-  list_display = ('name', 'email', 'company', 'subscribe_to_updates', 'created_at')
+  list_display = ('name', 'email', 'phone', 'company', 'subscribe_to_updates', 'created_at')
   list_filter = ('subscribe_to_updates', 'created_at')
-  search_fields = ('name', 'email', 'company')
+  search_fields = ('name', 'email', 'phone', 'company')
   readonly_fields = ('created_at', 'updated_at')
 
 

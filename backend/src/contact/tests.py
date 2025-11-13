@@ -10,6 +10,7 @@ class ContactSubmissionTests(APITestCase):
     payload = {
       'name': 'Jane Doe',
       'email': 'jane@example.com',
+      'phone': '+44 20 7946 0018',
       'company': 'Acme Inc.',
       'message': 'Interested in a redesign project.',
       'subscribe_to_updates': True
@@ -21,6 +22,7 @@ class ContactSubmissionTests(APITestCase):
     self.assertEqual(ContactSubmission.objects.count(), 1)
     submission = ContactSubmission.objects.first()
     self.assertTrue(submission.subscribe_to_updates)
+    self.assertEqual(submission.phone, '+44 20 7946 0018')
 
 
 class SubscriptionTests(APITestCase):

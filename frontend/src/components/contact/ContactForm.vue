@@ -5,6 +5,7 @@ import { apiUrl } from '../../utils/api'
 interface ContactFormState {
   name: string
   email: string
+  phone: string
   company: string
   message: string
   subscribe: boolean
@@ -13,6 +14,7 @@ interface ContactFormState {
 const form = reactive<ContactFormState>({
   name: '',
   email: '',
+  phone: '',
   company: '',
   message: '',
   subscribe: true
@@ -24,6 +26,7 @@ const error = ref('')
 const fieldErrors = reactive<Record<keyof ContactFormState, string[]>>({
   name: [],
   email: [],
+  phone: [],
   company: [],
   message: [],
   subscribe: []
@@ -35,6 +38,7 @@ const validate = () => {
   let isValid = true
   fieldErrors.name = []
   fieldErrors.email = []
+  fieldErrors.phone = []
   fieldErrors.company = []
   fieldErrors.message = []
   fieldErrors.subscribe = []
@@ -52,6 +56,14 @@ const validate = () => {
     isValid = false
   }
 
+  if (form.phone.trim()) {
+    const stripped = form.phone.replace(/[^\d+]/g, '')
+    if (stripped.length < 7) {
+      fieldErrors.phone.push('Enter a valid phone number')
+      isValid = false
+    }
+  }
+
   if (!form.message.trim()) {
     fieldErrors.message.push('Please tell us about your project')
     isValid = false
@@ -63,6 +75,7 @@ const validate = () => {
 const resetForm = () => {
   form.name = ''
   form.email = ''
+  form.phone = ''
   form.company = ''
   form.message = ''
   form.subscribe = true
@@ -81,6 +94,7 @@ const submit = async () => {
     const submissionPayload = {
       name: form.name,
       email: form.email,
+      phone: form.phone,
       company: form.company,
       message: form.message,
       subscribe_to_updates: form.subscribe
@@ -178,6 +192,14 @@ const submit = async () => {
           required
           variant="outlined"
           :error-messages="fieldErrors.email"
+        />
+        <VTextField
+          v-model="form.phone"
+          label="Phone"
+          type="tel"
+          placeholder="+44 20 7946 0018"
+          variant="outlined"
+          :error-messages="fieldErrors.phone"
         />
         <VTextField
           v-model="form.company"

@@ -151,6 +151,58 @@ export const routes: RouteRecordRaw[] = [
     }
   },
   {
+    path: '/blog',
+    name: 'blog',
+    component: () => import('../views/BlogListView.vue'),
+    meta: {
+      title: 'WebEssex | Blog',
+      metaTags: [
+        {
+          name: 'description',
+          content:
+            'Case studies, launch playbooks, and SEO-backed insights from the WebEssex studio.'
+        }
+      ],
+      seo: {
+        keywords: ['WebEssex blog', 'design insights', 'Vue case studies', 'product launches'],
+        canonical: '/blog',
+        ogTitle: 'WebEssex Blog',
+        ogDescription: 'Stories and insights from the WebEssex team.',
+        ogType: 'website',
+        ogImage: '/social/blog.png',
+        twitterCard: 'summary_large_image',
+        twitterTitle: 'WebEssex Blog',
+        twitterDescription: 'Insights for ambitious digital teams.',
+        twitterImage: '/social/blog.png'
+      }
+    }
+  },
+  {
+    path: '/blog/:slug',
+    name: 'blog-detail',
+    component: () => import('../views/BlogDetailView.vue'),
+    meta: {
+      title: 'WebEssex | Article',
+      metaTags: [
+        {
+          name: 'description',
+          content: 'Detailed article from the WebEssex team.'
+        }
+      ],
+      seo: {
+        canonical: '/blog',
+        ogTitle: 'WebEssex Article',
+        ogDescription: 'A new perspective from the WebEssex studio.',
+        ogType: 'article',
+        ogImage: '/social/blog.png',
+        twitterCard: 'summary_large_image',
+        twitterTitle: 'WebEssex Article',
+        twitterDescription: 'A new perspective from the WebEssex studio.',
+        twitterImage: '/social/blog.png'
+      }
+    }
+  },
+  {
     path: '/contact',
     name: 'contact',
     component: () => import('../views/ContactView.vue'),
