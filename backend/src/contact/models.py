@@ -36,3 +36,18 @@ class Subscription(TimeStampedModel):
 
   def __str__(self) -> str:
     return f"Subscription<{self.email}>"
+
+
+class WorkshopRequest(TimeStampedModel):
+  preferred_date = models.DateField()
+  preferred_time = models.TimeField()
+  location = models.CharField(max_length=200)
+  email = models.EmailField()
+  phone = models.CharField(max_length=30)
+  description = models.TextField()
+
+  class Meta:
+    ordering = ['-created_at']
+
+  def __str__(self) -> str:
+    return f"WorkshopRequest<{self.email} - {self.preferred_date}>"

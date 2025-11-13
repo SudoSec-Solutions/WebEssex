@@ -8,7 +8,7 @@
       </p>
     </div>
     <div class="services-cta__actions">
-      <VBtn color="secondary" variant="flat" size="large" href="mailto:hello@webessex.dev">
+      <VBtn color="secondary" variant="flat" size="large" to="/contact">
         Talk to us
       </VBtn>
       <VBtn color="tertiary" variant="outlined" size="large" to="/about">

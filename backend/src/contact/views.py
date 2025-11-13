@@ -2,8 +2,8 @@ from rest_framework import status
 from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 
-from .models import ContactSubmission, Subscription
-from .serializers import ContactSubmissionSerializer, SubscriptionSerializer
+from .models import ContactSubmission, Subscription, WorkshopRequest
+from .serializers import ContactSubmissionSerializer, SubscriptionSerializer, WorkshopRequestSerializer
 
 
 class ContactSubmissionView(CreateAPIView):
@@ -42,3 +42,8 @@ class SubscriptionView(CreateAPIView):
     response_serializer = self.get_serializer(subscription)
     status_code = status.HTTP_201_CREATED if created else status.HTTP_200_OK
     return Response(response_serializer.data, status=status_code)
+
+
+class WorkshopRequestView(CreateAPIView):
+  queryset = WorkshopRequest.objects.all()
+  serializer_class = WorkshopRequestSerializer

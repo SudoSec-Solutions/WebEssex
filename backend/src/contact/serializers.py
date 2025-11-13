@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import ContactSubmission, Subscription
+from .models import ContactSubmission, Subscription, WorkshopRequest
 
 
 class ContactSubmissionSerializer(serializers.ModelSerializer):
@@ -23,3 +23,19 @@ class SubscriptionSerializer(serializers.ModelSerializer):
 
   def validate_email(self, value: str) -> str:
     return value.lower()
+
+
+class WorkshopRequestSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = WorkshopRequest
+    fields = [
+      'id',
+      'preferred_date',
+      'preferred_time',
+      'location',
+      'email',
+      'phone',
+      'description',
+      'created_at'
+    ]
+    read_only_fields = ['id', 'created_at']

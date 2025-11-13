@@ -24,7 +24,7 @@ const offerings = ['Brand Strategy', 'UX & UI Design', 'Web Applications', 'Desi
       <VBtn color="secondary" variant="flat" size="large" to="/about">
         Meet the team
       </VBtn>
-      <VBtn color="tertiary" variant="outlined" size="large" href="mailto:hello@webessex.dev">
+      <VBtn color="tertiary" variant="outlined" size="large" to="/contact">
         Start a project
       </VBtn>
     </div>
