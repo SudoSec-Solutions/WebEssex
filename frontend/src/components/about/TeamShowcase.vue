@@ -19,7 +19,7 @@ const team: TeamMember[] = [
     specialties: ['Technical Leadership', 'Product Vision', 'Full-Stack Delivery'],
     initials: 'AE',
     accent: 'primary',
-    image: new URL('../../assets/Team/Manager_CEO.jpg', import.meta.url).href
+    image: new URL('../../assets/Team/Manager_CEO.webp', import.meta.url).href
   },
   {
     name: 'Jamie Baker',
@@ -29,7 +29,7 @@ const team: TeamMember[] = [
     specialties: ['Vue & Vite', 'DX Tooling', 'Performance'],
     initials: 'NP',
     accent: 'secondary',
-    image: new URL('../../assets/Team/Lead_Engineer.jpg', import.meta.url).href
+    image: new URL('../../assets/Team/Lead_Engineer.webp', import.meta.url).href
   },
   {
     name: 'Ellie Deacon',
@@ -39,7 +39,7 @@ const team: TeamMember[] = [
     specialties: ['Product Discovery', 'Journey Mapping', 'Stakeholder Alignment'],
     initials: 'IM',
     accent: 'tertiary',
-    image: new URL('../../assets/Team/Product_Strategist.jpg', import.meta.url).href
+    image: new URL('../../assets/Team/Product_Strategist.webp', import.meta.url).href
   },
   {
     name: 'Chloe Smith',
@@ -49,7 +49,7 @@ const team: TeamMember[] = [
     specialties: ['Operations', 'QA & UAT', 'Client Enablement'],
     initials: 'EB',
     accent: 'quaternary',
-    image: new URL('../../assets/Team/Delivery_Partner.jpg', import.meta.url).href
+    image: new URL('../../assets/Team/Delivery_Partner.webp', import.meta.url).href
   }
 ]
 </script>
