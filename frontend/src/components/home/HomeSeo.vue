@@ -4,21 +4,21 @@ const seoNarrative = [
     heading: 'Digital design agency in Essex',
     body:
       'WebEssex partners with founders and marketing teams to launch distinctive digital experiences that feel unmistakably on brand.',
-    icon: 'mdi-target-variant',
+    icon: '$mdi-target-variant',
     accent: 'primary'
   },
   {
     heading: 'Conversion-focused delivery',
     body:
       'Every page is planned around clear goals—from lead generation to product launches—so your website becomes a growth engine, not just a brochure.',
-    icon: 'mdi-chart-timeline-variant',
+    icon: '$mdi-chart-timeline-variant',
     accent: 'secondary'
   },
   {
     heading: 'Collaborative, transparent process',
     body:
       'Expect senior specialists, weekly momentum updates, and a roadmap that keeps stakeholders aligned from strategy through optimisation.',
-    icon: 'mdi-account-group-outline',
+    icon: '$mdi-account-group-outline',
     accent: 'tertiary'
   }
 ]

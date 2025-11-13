@@ -4,7 +4,7 @@ const contactChannels = [
     title: 'Project enquiries',
     subtitle: 'Email',
     description: 'New products, redesigns, or partnership inquiries.',
-    icon: 'mdi-email-outline',
+    icon: '$mdi-email-outline',
     value: 'hello@webessex.uk',
     href: 'mailto:hello@webessex.uk',
     accent: 'primary'
@@ -13,7 +13,7 @@ const contactChannels = [
     title: 'Phone',
     subtitle: 'Direct line',
     description: 'Weekdays 9am–5pm GMT.',
-    icon: 'mdi-phone-outline',
+    icon: '$mdi-phone-outline',
     value: '08002922472',
     href: 'tel:08002922472',
     accent: 'secondary'
@@ -22,7 +22,7 @@ const contactChannels = [
     title: 'Studio',
     subtitle: 'Visit us',
     description: 'Colchester, Essex · Remote across UK & EU.',
-    icon: 'mdi-map-marker-outline',
+    icon: '$mdi-map-marker-outline',
     value: 'By appointment only',
     accent: 'tertiary'
   }

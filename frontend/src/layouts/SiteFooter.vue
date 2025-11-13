@@ -66,7 +66,7 @@ const toggleExpanded = () => {
           aria-label="Toggle footer content"
           @click="toggleExpanded"
         >
-          <VIcon :icon="contentExpanded ? 'mdi-chevron-up' : 'mdi-chevron-down'" />
+          <VIcon :icon="contentExpanded ? '$mdi-chevron-up' : '$mdi-chevron-down'" />
         </VBtn>
       </div>
       <VExpandTransition>

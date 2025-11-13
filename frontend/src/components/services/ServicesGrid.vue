@@ -15,7 +15,7 @@ const services: ServiceTile[] = [
     description:
       'Map business goals to user needs with collaborative workshops, journey mapping, and prioritised backlogs that unlock clarity.',
     highlights: ['Product framing & roadmaps', 'Stakeholder alignment sessions', 'Prototyping & validation sprints'],
-    icon: 'mdi-compass-outline',
+    icon: '$mdi-compass-outline',
     accent: 'primary'
   },
   {
@@ -24,7 +24,7 @@ const services: ServiceTile[] = [
     description:
       'Create visual systems and responsive interfaces that feel unmistakably yours, while staying accessible and easy to evolve.',
     highlights: ['Brand identity & design systems', 'UX / UI for web & product', 'Content playbooks & tone'],
-    icon: 'mdi-palette',
+    icon: '$mdi-palette',
     accent: 'secondary'
   },
   {
@@ -33,7 +33,7 @@ const services: ServiceTile[] = [
     description:
       'Ship performant Vue applications backed by modern tooling, automated QA, and support that keeps releases reliable.',
     highlights: ['Vue & Vite engineering teams', 'Design system implementation', 'Performance audits & optimisation'],
-    icon: 'mdi-lightning-bolt-outline',
+    icon: '$mdi-lightning-bolt-outline',
     accent: 'tertiary'
   },
   {
@@ -42,7 +42,7 @@ const services: ServiceTile[] = [
     description:
       'Embed WebEssex within your product organisation for long-term iteration, measurement, and cross-team enablement.',
     highlights: ['Roadmap co-ownership', 'Data-informed optimisation', 'Enablement & documentation'],
-    icon: 'mdi-handshake-outline',
+    icon: '$mdi-handshake-outline',
     accent: 'quaternary'
   }
 ]
@@ -70,7 +70,7 @@ const services: ServiceTile[] = [
         <li v-for="item in service.highlights" :key="item">
           <VIcon
             :class="['service-card__list-icon', `service-card__list-icon--${service.accent}`]"
-            icon="mdi-check-circle"
+            icon="$mdi-check-circle"
             size="18"
           />
           <span>{{ item }}</span>

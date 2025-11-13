@@ -3,7 +3,7 @@ const highlights = [
   {
     title: 'Future ready builds',
     accent: 'primary',
-    icon: 'mdi-rocket-launch',
+    icon: '$mdi-rocket-launch',
     lead: 'Websites that perform on day one',
     points: [
       'Lightning-fast pages that convert visitors',
@@ -14,7 +14,7 @@ const highlights = [
   {
     title: 'Design first',
     accent: 'secondary',
-    icon: 'mdi-palette',
+    icon: '$mdi-palette',
     lead: 'Senior designers on every brief',
     points: [
       'Bespoke visuals shaped around your brand',
@@ -25,7 +25,7 @@ const highlights = [
   {
     title: 'Iterate quickly',
     accent: 'tertiary',
-    icon: 'mdi-repeat',
+    icon: '$mdi-repeat',
     lead: 'Momentum your team can feel',
     points: [
       'Clear milestones and frequent check-ins',

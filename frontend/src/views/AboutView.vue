@@ -15,15 +15,15 @@ import TeamShowcase from '../components/about/TeamShowcase.vue'
       </p>
       <ul class="about-hero__pillars" aria-label="Our delivery pillars">
         <li>
-          <VIcon icon="mdi-compass-outline" size="20" />
+          <VIcon icon="$mdi-compass-outline" size="20" />
           Strategic discovery that aligns stakeholders from day one.
         </li>
         <li>
-          <VIcon icon="mdi-flash-outline" size="20" />
+          <VIcon icon="$mdi-flash-outline" size="20" />
           Rapid, iterative delivery that keeps momentum visible every week.
         </li>
         <li>
-          <VIcon icon="mdi-shield-check-outline" size="20" />
+          <VIcon icon="$mdi-shield-check-outline" size="20" />
           Launch support and optimisation baked into every engagement.
         </li>
       </ul>

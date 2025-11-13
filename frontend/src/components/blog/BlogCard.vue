@@ -36,7 +36,7 @@ defineProps<{
       </div>
       <RouterLink :to="`/blog/${post.slug}`" class="blog-card__cta">
         Read article
-        <VIcon icon="mdi-arrow-top-right" size="18" />
+        <VIcon icon="$mdi-arrow-top-right" size="18" />
       </RouterLink>
     </div>
   </article>

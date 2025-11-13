@@ -1,8 +1,65 @@
-import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
 
 import { md3 } from 'vuetify/blueprints'
+import { aliases as defaultAliases, mdi } from 'vuetify/iconsets/mdi-svg'
 import { createVuetify } from 'vuetify'
+import {
+  mdiAccountGroupOutline,
+  mdiAlertCircle,
+  mdiArrowTopRight,
+  mdiChartTimelineVariant,
+  mdiCheckCircle,
+  mdiChevronDown,
+  mdiChevronUp,
+  mdiCompassOutline,
+  mdiEmailOutline,
+  mdiFlashOutline,
+  mdiHandshakeOutline,
+  mdiLightningBoltOutline,
+  mdiMapMarker,
+  mdiMapMarkerOutline,
+  mdiMenu,
+  mdiPalette,
+  mdiPhone,
+  mdiPhoneOutline,
+  mdiRepeat,
+  mdiRocketLaunch,
+  mdiShieldCheckOutline,
+  mdiTargetVariant,
+  mdiWeatherNight,
+  mdiWeatherSunny
+} from '@mdi/js'
+
+const toSvg = (path: string) => `svg:${path}`
+
+const iconAliases = {
+  ...defaultAliases,
+  'mdi-arrow-top-right': toSvg(mdiArrowTopRight),
+  'mdi-check-circle': toSvg(mdiCheckCircle),
+  'mdi-alert-circle': toSvg(mdiAlertCircle),
+  'mdi-email-outline': toSvg(mdiEmailOutline),
+  'mdi-phone-outline': toSvg(mdiPhoneOutline),
+  'mdi-map-marker-outline': toSvg(mdiMapMarkerOutline),
+  'mdi-compass-outline': toSvg(mdiCompassOutline),
+  'mdi-palette': toSvg(mdiPalette),
+  'mdi-lightning-bolt-outline': toSvg(mdiLightningBoltOutline),
+  'mdi-handshake-outline': toSvg(mdiHandshakeOutline),
+  'mdi-check-circle-outline': toSvg(mdiCheckCircle),
+  'mdi-flash-outline': toSvg(mdiFlashOutline),
+  'mdi-shield-check-outline': toSvg(mdiShieldCheckOutline),
+  'mdi-map-marker': toSvg(mdiMapMarker),
+  'mdi-target-variant': toSvg(mdiTargetVariant),
+  'mdi-chart-timeline-variant': toSvg(mdiChartTimelineVariant),
+  'mdi-account-group-outline': toSvg(mdiAccountGroupOutline),
+  'mdi-rocket-launch': toSvg(mdiRocketLaunch),
+  'mdi-repeat': toSvg(mdiRepeat),
+  'mdi-chevron-up': toSvg(mdiChevronUp),
+  'mdi-chevron-down': toSvg(mdiChevronDown),
+  'mdi-weather-sunny': toSvg(mdiWeatherSunny),
+  'mdi-weather-night': toSvg(mdiWeatherNight),
+  'mdi-phone': toSvg(mdiPhone),
+  'mdi-menu': toSvg(mdiMenu)
+}
 
 const wesLight = {
   dark: false,
@@ -45,6 +102,13 @@ const wesDark = {
 
 export default createVuetify({
   blueprint: md3,
+  icons: {
+    defaultSet: 'mdi',
+    aliases: iconAliases,
+    sets: {
+      mdi
+    }
+  },
   theme: {
     defaultTheme: 'wesLight',
     themes: {

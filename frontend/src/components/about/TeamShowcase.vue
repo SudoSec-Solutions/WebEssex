@@ -93,7 +93,7 @@ const team: TeamMember[] = [
         </p>
         <ul class="team-card__meta">
           <li class="team-card__location">
-            <VIcon icon="mdi-map-marker" size="18" />
+            <VIcon icon="$mdi-map-marker" size="18" />
             <span>{{ member.location }}</span>
           </li>
         </ul>

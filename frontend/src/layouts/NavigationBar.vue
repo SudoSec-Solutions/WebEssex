@@ -32,7 +32,7 @@ const theme = useTheme()
 const themeStorageKey = 'wesTheme'
 
 const isDarkTheme = computed(() => theme.global.current.value.dark)
-const themeIcon = computed(() => (isDarkTheme.value ? 'mdi-weather-sunny' : 'mdi-weather-night'))
+const themeIcon = computed(() => (isDarkTheme.value ? '$mdi-weather-sunny' : '$mdi-weather-night'))
 const themeLabel = computed(() =>
   isDarkTheme.value ? 'Switch to light theme' : 'Switch to dark theme'
 )
@@ -102,7 +102,7 @@ onMounted(() => {
           variant="flat"
           :href="navPhoneHref"
         >
-          <VIcon icon="mdi-phone" start />
+          <VIcon icon="$mdi-phone" start />
           {{ navPhoneNumber }}
         </VBtn>
         <VBtn
@@ -125,7 +125,7 @@ onMounted(() => {
           :aria-controls="drawerId"
           @click="drawerOpen = !drawerOpen"
         >
-          <VIcon icon="mdi-menu" />
+          <VIcon icon="$mdi-menu" />
         </VBtn>
       </div>
     </VContainer>
@@ -153,7 +153,7 @@ onMounted(() => {
       </li>
       <li class="nav-drawer__item">
         <a :href="navPhoneHref" class="nav-drawer__link nav-drawer__link--call">
-          <VIcon icon="mdi-phone" start />
+          <VIcon icon="$mdi-phone" start />
           {{ navPhoneNumber }}
         </a>
       </li>

@@ -232,11 +232,11 @@ const submit = async () => {
         </VBtn>
       </div>
       <div v-if="success" class="contact-form__alert contact-form__alert--success" role="status" aria-live="polite">
-        <VIcon icon="mdi-check-circle" size="20" />
+        <VIcon icon="$mdi-check-circle" size="20" />
         <span>Thanks! We’ll be in touch shortly.</span>
       </div>
       <div v-if="error" class="contact-form__alert contact-form__alert--error" role="alert" aria-live="assertive">
-        <VIcon icon="mdi-alert-circle" size="20" />
+        <VIcon icon="$mdi-alert-circle" size="20" />
         <span>{{ error }}</span>
       </div>
     </form>
