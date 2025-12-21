@@ -13,7 +13,7 @@ const error = ref('')
 const categoriesLoaded = ref(false)
 const totalCount = ref(0)
 const currentPage = ref(1)
-const pageSize = 6
+const pageSize = 12
 
 const loadCategories = async () => {
   if (categoriesLoaded.value) return
