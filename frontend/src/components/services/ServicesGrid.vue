@@ -19,7 +19,7 @@ const services: ServiceTile[] = [
     accent: 'primary'
   },
   {
-    title: 'Brand & experience design',
+    title: 'Brand & design',
     label: 'Design',
     description:
       'Create visual systems and responsive interfaces that feel unmistakably yours, while staying accessible and easy to evolve.',
@@ -56,11 +56,13 @@ const services: ServiceTile[] = [
       :class="['service-card', `service-card--${service.accent}`]"
     >
       <div class="service-card__halo" aria-hidden="true" />
-      <span :class="['service-card__badge', `service-card__badge--${service.accent}`]">
-        {{ service.label }}
-      </span>
-      <div class="service-card__icon">
-        <VIcon :icon="service.icon" size="32" />
+      <div class="service-card__badge-row">
+        <span :class="['service-card__badge', `service-card__badge--${service.accent}`]">
+          {{ service.label }}
+        </span>
+        <div class="service-card__icon">
+          <VIcon :icon="service.icon" size="32" />
+        </div>
       </div>
       <h2 :class="['service-card__title', `service-card__title--${service.accent}`]">
         {{ service.title }}
@@ -143,7 +145,7 @@ const services: ServiceTile[] = [
   box-shadow: 0 12px 22px rgba(var(--v-theme-on-background), 0.08);
   z-index: 1;
   width: fit-content;
-  margin-bottom: 1.1rem;
+  margin-bottom: 0;
 }
 
 .service-card__icon {
@@ -153,20 +155,32 @@ const services: ServiceTile[] = [
   border-radius: 1.1rem;
   display: grid;
   place-items: center;
-  margin-bottom: 1.25rem;
   color: var(--service-icon-color, rgb(var(--service-accent-rgb)));
   background: rgba(var(--service-accent-rgb), 0.16);
   z-index: 1;
+  flex: 0 0 auto;
 }
 
 .service-card__title {
   position: relative;
-  margin: 0 0 1rem;
+  margin: 0 0 0.35rem;
   font-size: 1.25rem;
+  line-height: 1.3;
+  min-height: 2.6em;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: rgba(var(--v-theme-on-surface), 0.9);
   z-index: 1;
+}
+
+.service-card__badge-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  z-index: 1;
+  margin-bottom: 0.65rem;
 }
 
 .service-card p {

@@ -39,7 +39,7 @@ const highlights = [
 <template>
   <section class="home-highlights" aria-labelledby="home-highlights-title">
     <h2 id="home-highlights-title" class="home-highlights__heading">
-      <span class="home-highlights__heading-text">What partnering with WebEssex feels like</span>
+      <span class="home-highlights__heading-text">Partnering with WebEssex</span>
     </h2>
     <div class="home-highlights__grid">
       <VCard

@@ -1,21 +1,21 @@
 <script setup lang="ts">
 const seoNarrative = [
   {
-    heading: 'Digital design agency in Essex',
+    heading: 'Product studio in Essex',
     body:
       'WebEssex partners with founders and marketing teams to launch distinctive digital experiences that feel unmistakably on brand.',
     icon: '$mdi-target-variant',
     accent: 'primary'
   },
   {
-    heading: 'Conversion-focused delivery',
+    heading: 'Conversion-focused',
     body:
       'Every page is planned around clear goals—from lead generation to product launches—so your website becomes a growth engine, not just a brochure.',
     icon: '$mdi-chart-timeline-variant',
     accent: 'secondary'
   },
   {
-    heading: 'Collaborative, transparent process',
+    heading: 'Collaborative, transparent',
     body:
       'Expect senior specialists, weekly momentum updates, and a roadmap that keeps stakeholders aligned from strategy through optimisation.',
     icon: '$mdi-account-group-outline',
@@ -24,7 +24,7 @@ const seoNarrative = [
 ]
 
 const seoKeywords = [
-  'Digital design agency Essex',
+  'Product studio Essex',
   'Website redesign specialists',
   'Brand-led web development',
   'Product launch websites',

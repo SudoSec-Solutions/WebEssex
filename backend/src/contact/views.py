@@ -2,8 +2,8 @@ from rest_framework import status
 from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 
-from .models import ContactSubmission, Subscription, WorkshopRequest
-from .serializers import ContactSubmissionSerializer, SubscriptionSerializer, WorkshopRequestSerializer
+from .models import ContactSubmission, Lead, Subscription, WorkshopRequest
+from .serializers import ContactSubmissionSerializer, LeadSerializer, SubscriptionSerializer, WorkshopRequestSerializer
 
 
 class ContactSubmissionView(CreateAPIView):
@@ -24,7 +24,8 @@ class SubscriptionView(CreateAPIView):
       email=serializer.validated_data['email'],
       defaults={
         'name': serializer.validated_data.get('name', ''),
-        'source': serializer.validated_data.get('source', '')
+        'source': serializer.validated_data.get('source', ''),
+        'consent': serializer.validated_data.get('consent', False)
       }
     )
 
@@ -36,6 +37,9 @@ class SubscriptionView(CreateAPIView):
         if new_value:
           setattr(subscription, field, new_value)
           update_fields.append(field)
+      if serializer.validated_data.get('consent') is True and not subscription.consent:
+        subscription.consent = True
+        update_fields.append('consent')
       if update_fields:
         subscription.save(update_fields=update_fields)
 
@@ -47,3 +51,8 @@ class SubscriptionView(CreateAPIView):
 class WorkshopRequestView(CreateAPIView):
   queryset = WorkshopRequest.objects.all()
   serializer_class = WorkshopRequestSerializer
+
+
+class LeadView(CreateAPIView):
+  queryset = Lead.objects.all()
+  serializer_class = LeadSerializer

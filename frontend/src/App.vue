@@ -2,6 +2,10 @@
 import { RouterView } from 'vue-router'
 import NavigationBar from './layouts/NavigationBar.vue'
 import SiteFooter from './layouts/SiteFooter.vue'
+import CookieConsent from './components/legal/CookieConsent.vue'
+import StructuredData from './components/shared/StructuredData.vue'
+import BreadcrumbSchema from './components/shared/BreadcrumbSchema.vue'
+import WebPageSchema from './components/shared/WebPageSchema.vue'
 </script>
 
 <template>
@@ -13,6 +17,10 @@ import SiteFooter from './layouts/SiteFooter.vue'
       </VContainer>
     </VMain>
     <SiteFooter />
+    <CookieConsent />
+    <StructuredData />
+    <BreadcrumbSchema />
+    <WebPageSchema />
   </VApp>
 </template>
 

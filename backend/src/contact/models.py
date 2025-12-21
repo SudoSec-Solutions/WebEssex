@@ -18,6 +18,7 @@ class ContactSubmission(TimeStampedModel):
   company = models.CharField(max_length=150, blank=True)
   message = models.TextField()
   subscribe_to_updates = models.BooleanField(default=False)
+  consent_privacy = models.BooleanField(default=False)
 
   class Meta:
     ordering = ['-created_at']
@@ -30,6 +31,7 @@ class Subscription(TimeStampedModel):
   email = models.EmailField(unique=True)
   name = models.CharField(max_length=150, blank=True)
   source = models.CharField(max_length=100, blank=True)
+  consent = models.BooleanField(default=False)
 
   class Meta:
     ordering = ['-created_at']
@@ -51,3 +53,19 @@ class WorkshopRequest(TimeStampedModel):
 
   def __str__(self) -> str:
     return f"WorkshopRequest<{self.email} - {self.preferred_date}>"
+
+
+class Lead(TimeStampedModel):
+  name = models.CharField(max_length=150)
+  email = models.EmailField()
+  phone = models.CharField(max_length=30, blank=True)
+  company = models.CharField(max_length=150, blank=True)
+  plan = models.CharField(max_length=60)
+  message = models.TextField(blank=True)
+  consent_privacy = models.BooleanField(default=False)
+
+  class Meta:
+    ordering = ['-created_at']
+
+  def __str__(self) -> str:
+    return f"Lead<{self.email} - {self.plan}>"

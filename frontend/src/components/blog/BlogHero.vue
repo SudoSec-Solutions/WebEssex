@@ -19,7 +19,7 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding-block: clamp(1.5rem, 4vw, 3rem);
+  padding-block: clamp(0.4rem, 1.2vw, 0.75rem);
   max-width: 760px;
   margin: 0 auto;
 }
@@ -35,7 +35,11 @@
   margin: 0;
   font-size: clamp(2.2rem, 5vw, 3.2rem);
   letter-spacing: -0.02em;
-  color: rgba(var(--v-theme-on-background), 0.95);
+  background: linear-gradient(120deg, #4c52ff 0%, #2bb673 50%, #0c77c2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
 .blog-hero__description {

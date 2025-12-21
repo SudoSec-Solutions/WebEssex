@@ -77,7 +77,7 @@ const toggleExpanded = () => {
         >
           <div class="footer__social">
             <span class="footer__brand footer__brand--desktop">© {{ currentYear }} WebEssex</span>
-          <div class="footer__links">
+            <div class="footer__links">
             <a
               href="https://www.facebook.com/profile.php?id=61582622033324"
               target="_blank"
@@ -108,6 +108,13 @@ const toggleExpanded = () => {
               </a>
             </div>
           </div>
+          <div class="footer__legal">
+            <span class="footer__title">Legal</span>
+            <div class="footer__links footer__links--legal">
+              <RouterLink to="/privacy">Privacy policy</RouterLink>
+              <RouterLink to="/cookies">Cookie policy</RouterLink>
+            </div>
+          </div>
           <NewsletterSubscription class="footer__newsletter" />
         </div>
       </VExpandTransition>
@@ -117,7 +124,7 @@ const toggleExpanded = () => {
 
 <style scoped>
 .footer {
-  padding-block: 1.5rem;
+  padding-block: 0.6rem 0.2rem;
 }
 
 .footer__content {
@@ -125,14 +132,14 @@ const toggleExpanded = () => {
   width: 100%;
   margin: 0 auto;
   color: rgb(var(--v-theme-on-primary));
-  font-size: 0.9rem;
-  letter-spacing: 0.03em;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
 }
 
 .footer__grid {
   display: flex;
   flex-direction: column;
-  gap: clamp(1.5rem, 4vw, 2.75rem);
+  gap: 0.6rem;
   align-items: stretch;
 }
 
@@ -142,7 +149,7 @@ const toggleExpanded = () => {
   justify-content: space-between;
   gap: 0.75rem;
   width: 100%;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.2rem;
 }
 
 .footer__toggle {
@@ -151,7 +158,7 @@ const toggleExpanded = () => {
 
 .footer__social {
   display: grid;
-  gap: 1rem;
+  gap: 0.3rem;
   justify-items: center;
   text-align: center;
 }
@@ -169,7 +176,7 @@ const toggleExpanded = () => {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 1.25rem;
+  gap: 0.45rem;
 }
 
 .footer__links a {
@@ -186,10 +193,29 @@ const toggleExpanded = () => {
   width: 100%;
 }
 
+.footer__legal {
+  display: grid;
+  gap: 0.3rem;
+  justify-items: center;
+  text-align: center;
+}
+
+.footer__title {
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+}
+
+.footer__links--legal {
+  flex-direction: row;
+  gap: 0.4rem;
+}
+
 @media (max-width: 640px) {
   .footer__links {
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.2rem;
   }
 }
 
@@ -197,10 +223,11 @@ const toggleExpanded = () => {
   .footer__grid {
     flex-direction: row;
     align-items: flex-start;
-    gap: clamp(2rem, 6vw, 3.5rem);
+    gap: clamp(0.9rem, 2.5vw, 1.35rem);
   }
 
   .footer__social,
+  .footer__legal,
   .footer__newsletter {
     flex: 1;
   }
@@ -217,6 +244,11 @@ const toggleExpanded = () => {
   .footer__newsletter {
     margin-left: auto;
     max-width: 520px;
+  }
+
+  .footer__legal {
+    justify-items: flex-start;
+    text-align: left;
   }
 
   .footer__header {

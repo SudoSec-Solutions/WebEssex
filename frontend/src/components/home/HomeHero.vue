@@ -8,16 +8,16 @@ const offerings = ['Brand Strategy', 'UX & UI Design', 'Web Applications', 'Desi
       WebEssex · Essex, UK
     </VChip>
     <h1 id="home-hero-title" class="home-hero__title">
-      <span class="home-hero__title-accent">Design.</span>
-      <span class="home-hero__title-accent home-hero__title-accent--secondary">Build.</span>
-      <span class="home-hero__title-accent home-hero__title-accent--tertiary">Launch.</span>
+      <span class="home-hero__title-accent">Design</span>
+      <span class="home-hero__title-accent home-hero__title-accent--secondary">Build</span>
+      <span class="home-hero__title-accent home-hero__title-accent--tertiary">Launch</span>
     </h1>
     <h2 class="home-hero__tagline">
-      Digital design and web development for <span>ambitious brands.</span>
+      Product & delivery studio for <span>ambitious teams.</span>
     </h2>
     <p class="home-hero__subtitle">
-      WebEssex blends brand strategy, senior design talent, and high-performing websites to help Essex
-      and UK teams launch products, grow revenue, and stay ahead of change.
+      WebEssex is an Essex-based studio delivering web design, UX/UI, and web development for UK teams that need
+      fast-moving launches, clear scope, and reliable platforms.
     </p>
 
     <div class="home-hero__actions">
@@ -52,7 +52,7 @@ const offerings = ['Brand Strategy', 'UX & UI Design', 'Web Applications', 'Desi
   gap: 1.5rem;
   max-width: 50rem;
   text-align: center;
-  padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 3vw, 2.5rem);
+  padding: clamp(0.4rem, 1.2vw, 0.75rem) 0;
 }
 
 .home-hero__badge {

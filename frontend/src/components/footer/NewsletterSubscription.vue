@@ -3,7 +3,8 @@ import { reactive, ref } from 'vue'
 import { apiUrl } from '../../utils/api'
 
 const form = reactive({
-  email: ''
+  email: '',
+  consent: false
 })
 
 const submitting = ref(false)
@@ -11,7 +12,8 @@ const success = ref(false)
 const successMessage = ref('')
 const error = ref('')
 const fieldErrors = reactive({
-  email: [] as string[]
+  email: [] as string[],
+  consent: [] as string[]
 })
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -21,6 +23,7 @@ const resetState = () => {
   successMessage.value = ''
   error.value = ''
   fieldErrors.email = []
+  fieldErrors.consent = []
 }
 
 const submit = async () => {
@@ -40,12 +43,19 @@ const submit = async () => {
     return
   }
 
+  if (!form.consent) {
+    fieldErrors.consent.push('Consent is required')
+    error.value = 'Please confirm you agree to the privacy policy.'
+    return
+  }
+
   submitting.value = true
 
   try {
     const payload = {
       email,
-      source: 'footer'
+      source: 'footer',
+      consent: form.consent
     }
 
     const response = await fetch(apiUrl('/api/subscriptions/'), {
@@ -65,6 +75,10 @@ const submit = async () => {
           const emailErrors = data.email
           if (Array.isArray(emailErrors)) {
             fieldErrors.email = emailErrors.map(String)
+          }
+          const consentErrors = data.consent
+          if (Array.isArray(consentErrors)) {
+            fieldErrors.consent = consentErrors.map(String)
           }
 
           const nonField =
@@ -88,6 +102,7 @@ const submit = async () => {
     }
 
     fieldErrors.email = []
+    fieldErrors.consent = []
     error.value = ''
 
     if (response.status === 409) {
@@ -98,6 +113,7 @@ const submit = async () => {
 
     success.value = true
     form.email = ''
+    form.consent = false
   } catch (err) {
     if (!error.value) {
       error.value = err instanceof Error ? err.message : 'Something went wrong.'
@@ -135,6 +151,14 @@ const submit = async () => {
         Subscribe
       </VBtn>
     </form>
+    <div class="newsletter__consent">
+      <VCheckbox
+        v-model="form.consent"
+        label="I agree to the Privacy Policy"
+        density="compact"
+        :error-messages="fieldErrors.consent"
+      />
+    </div>
     <p
       v-if="success"
       class="newsletter__feedback newsletter__feedback--success"
@@ -157,14 +181,14 @@ const submit = async () => {
 <style scoped>
 .newsletter {
   display: grid;
-  gap: 0.4rem;
+  gap: 0.25rem;
   width: 100%;
   color: rgb(var(--v-theme-on-primary));
 }
 
 .newsletter__title {
   margin: 0;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -173,7 +197,7 @@ const submit = async () => {
 
 .newsletter__form {
   display: flex;
-  gap: 0.75rem;
+  gap: 0.5rem;
   align-items: center;
 }
 
@@ -191,8 +215,24 @@ const submit = async () => {
 
 .newsletter__feedback {
   margin: 0;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 600;
+}
+
+.newsletter__consent {
+  display: grid;
+  gap: 0.2rem;
+  color: rgb(var(--v-theme-on-primary));
+}
+
+.newsletter__consent a {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.newsletter__consent a:hover {
+  opacity: 0.8;
 }
 
 .newsletter__feedback--success {

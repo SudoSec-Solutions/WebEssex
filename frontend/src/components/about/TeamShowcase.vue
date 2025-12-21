@@ -2,54 +2,34 @@
 interface TeamMember {
   name: string
   role: string
-  location: string
-  bio: string
-  specialties: string[]
   initials: string
   accent: 'primary' | 'secondary' | 'tertiary' | 'quaternary'
-  image?: string
 }
 
 const team: TeamMember[] = [
   {
     name: 'Michael White',
     role: 'CEO · Manager · Lead Developer',
-    location: 'Braintree, UK',
-    bio: 'Founder and hands-on lead who pairs long-term product vision with architecture decisions that keep WebEssex fast and flexible.',
-    specialties: ['Technical Leadership', 'Product Vision', 'Full-Stack Delivery'],
-    initials: 'AE',
-    accent: 'primary',
-    image: new URL('../../assets/Team/Manager_CEO.webp', import.meta.url).href
+    initials: 'MW',
+    accent: 'primary'
   },
   {
     name: 'Jamie Baker',
     role: 'Lead Engineer',
-    location: 'Chelmsford, UK',
-    bio: 'Architects performant Vue applications and guides the engineering team on delivery patterns and automation.',
-    specialties: ['Vue & Vite', 'DX Tooling', 'Performance'],
-    initials: 'NP',
-    accent: 'secondary',
-    image: new URL('../../assets/Team/Lead_Engineer.webp', import.meta.url).href
+    initials: 'JB',
+    accent: 'secondary'
   },
   {
     name: 'Ellie Deacon',
     role: 'Product Strategist',
-    location: 'Braintree, UK',
-    bio: 'Connects business goals with UX outcomes, pairing workshops and rapid validation to keep launches focused.',
-    specialties: ['Product Discovery', 'Journey Mapping', 'Stakeholder Alignment'],
-    initials: 'IM',
-    accent: 'tertiary',
-    image: new URL('../../assets/Team/Product_Strategist.webp', import.meta.url).href
+    initials: 'ED',
+    accent: 'tertiary'
   },
   {
     name: 'Chloe Smith',
     role: 'Delivery Partner',
-    location: 'Remote, UK & EU',
-    bio: 'Owns delivery rhythms, comms, and QA so that every sprint ships accountable, production-ready work.',
-    specialties: ['Operations', 'QA & UAT', 'Client Enablement'],
-    initials: 'EB',
-    accent: 'quaternary',
-    image: new URL('../../assets/Team/Delivery_Partner.webp', import.meta.url).href
+    initials: 'CS',
+    accent: 'quaternary'
   }
 ]
 </script>
@@ -75,33 +55,13 @@ const team: TeamMember[] = [
         <div class="team-card__halo" aria-hidden="true" />
         <div class="team-card__header">
           <div class="team-card__avatar" aria-hidden="true">
-            <img
-              v-if="member.image"
-              :src="member.image"
-              :alt="`${member.name} portrait`"
-              loading="lazy"
-            />
-            <span v-else>{{ member.initials }}</span>
+            <span>{{ member.initials }}</span>
           </div>
           <div>
             <h3 class="team-card__name">{{ member.name }}</h3>
             <p class="team-card__role">{{ member.role }}</p>
           </div>
         </div>
-        <p class="team-card__bio">
-          {{ member.bio }}
-        </p>
-        <ul class="team-card__meta">
-          <li class="team-card__location">
-            <VIcon icon="$mdi-map-marker" size="18" />
-            <span>{{ member.location }}</span>
-          </li>
-        </ul>
-        <ul class="team-card__tags" aria-label="Specialties">
-          <li v-for="specialty in member.specialties" :key="specialty">
-            {{ specialty }}
-          </li>
-        </ul>
       </article>
     </div>
   </section>
@@ -220,12 +180,6 @@ const team: TeamMember[] = [
   overflow: hidden;
 }
 
-.team-card__avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .team-card__name {
   margin: 0;
   font-size: 1.15rem;
@@ -241,53 +195,6 @@ const team: TeamMember[] = [
   color: rgba(var(--v-theme-on-surface), 0.64);
 }
 
-.team-card__bio {
-  position: relative;
-  margin: 1.25rem 0 1.5rem;
-  color: rgba(var(--v-theme-on-surface), 0.75);
-  line-height: 1.6;
-  z-index: 1;
-}
-
-.team-card__meta {
-  list-style: none;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin: 0 0 1.25rem;
-  padding: 0;
-  color: rgba(var(--v-theme-on-surface), 0.65);
-  font-size: 0.95rem;
-  z-index: 1;
-}
-
-.team-card__location {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.team-card__tags {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 0;
-  padding: 0;
-  z-index: 1;
-}
-
-.team-card__tags li {
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  padding: 0.4rem 0.8rem;
-  border-radius: 999px;
-  background: rgba(var(--team-accent-rgb), 0.08);
-  border: 1px solid rgba(var(--team-accent-rgb), 0.18);
-  color: rgb(var(--team-accent-rgb));
-}
 
 .team-card--primary {
   --team-accent-rgb: var(--v-theme-primary);
@@ -327,24 +234,9 @@ const team: TeamMember[] = [
     align-items: flex-start;
   }
 
-  .team-card__tags {
-    justify-content: center;
-  }
-
   .team-card__avatar {
     width: 3.25rem;
     height: 3.25rem;
-  }
-
-  .team-card__bio {
-    margin: 1rem 0 1.25rem;
-    font-size: 0.95rem;
-  }
-
-  .team-card__tags li {
-    font-size: 0.75rem;
-    letter-spacing: 0.04em;
-    padding: 0.35rem 0.65rem;
   }
 }
 
@@ -371,14 +263,5 @@ const team: TeamMember[] = [
     font-size: 0.85rem;
   }
 
-  .team-card__meta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.35rem;
-  }
-
-  .team-card__meta li {
-    width: 100%;
-  }
 }
 </style>

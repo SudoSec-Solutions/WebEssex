@@ -2,7 +2,7 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from .models import ContactSubmission, Subscription, WorkshopRequest
+from .models import ContactSubmission, Lead, Subscription, WorkshopRequest
 
 
 class ContactSubmissionTests(APITestCase):
@@ -13,7 +13,8 @@ class ContactSubmissionTests(APITestCase):
       'phone': '+44 20 7946 0018',
       'company': 'Acme Inc.',
       'message': 'Interested in a redesign project.',
-      'subscribe_to_updates': True
+      'subscribe_to_updates': True,
+      'consent_privacy': True
     }
     url = reverse('contact:contact-submissions')
     response = self.client.post(url, payload, format='json')
@@ -27,7 +28,7 @@ class ContactSubmissionTests(APITestCase):
 
 class SubscriptionTests(APITestCase):
   def test_create_subscription(self):
-    payload = {'email': 'subscriber@example.com', 'name': 'Subscriber'}
+    payload = {'email': 'subscriber@example.com', 'name': 'Subscriber', 'consent': True}
     url = reverse('contact:subscriptions')
     response = self.client.post(url, payload, format='json')
 
@@ -36,7 +37,7 @@ class SubscriptionTests(APITestCase):
 
   def test_idempotent_subscription(self):
     Subscription.objects.create(email='subscriber@example.com')
-    payload = {'email': 'subscriber@example.com', 'name': 'Updated Name'}
+    payload = {'email': 'subscriber@example.com', 'name': 'Updated Name', 'consent': True}
     url = reverse('contact:subscriptions')
     response = self.client.post(url, payload, format='json')
 
@@ -62,3 +63,23 @@ class WorkshopRequestTests(APITestCase):
     self.assertEqual(WorkshopRequest.objects.count(), 1)
     request = WorkshopRequest.objects.first()
     self.assertEqual(request.location, 'London HQ')
+
+
+class LeadTests(APITestCase):
+  def test_create_lead(self):
+    payload = {
+      'name': 'Sam Essex',
+      'email': 'sam@example.com',
+      'phone': '+44 20 7946 0018',
+      'company': 'WebEssex',
+      'plan': 'Growth',
+      'message': 'Interested in the growth plan for a new product site.',
+      'consent_privacy': True
+    }
+    url = reverse('contact:leads')
+    response = self.client.post(url, payload, format='json')
+
+    self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+    self.assertEqual(Lead.objects.count(), 1)
+    lead = Lead.objects.first()
+    self.assertEqual(lead.plan, 'Growth')

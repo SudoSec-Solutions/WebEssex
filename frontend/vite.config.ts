@@ -40,7 +40,12 @@ function createSsgOptions(): ViteSSGOptions {
       const routes = Array.from(renderedRoutes)
       const now = new Date().toISOString()
 
-      const urls = new Set<string>()
+      const urlMeta = new Map<string, { lastmod: string; changefreq: string; priority: string }>()
+      const addUrl = (loc: string, meta: { lastmod: string; changefreq: string; priority: string }) => {
+        if (!loc || urlMeta.has(loc)) return
+        urlMeta.set(loc, meta)
+      }
+
       for (const route of routes) {
         const filePath = htmlFileForRoute(outDir, route)
         let canonical = ''
@@ -58,19 +63,19 @@ function createSsgOptions(): ViteSSGOptions {
           canonical = `${siteUrl}${ensureLeadingSlash(route)}`
         }
 
-        urls.add(canonical)
+        const priority = canonical === siteUrl || canonical === `${siteUrl}/` ? '1.0' : '0.8'
+        addUrl(canonical, { lastmod: now, changefreq: 'weekly', priority })
       }
 
-      const sitemapEntries = Array.from(urls)
-        .sort()
-        .map((loc) => {
-          const priority = loc.endsWith('/') ? '1.0' : '0.8'
+      const sitemapEntries = Array.from(urlMeta.entries())
+        .sort(([a], [b]) => a.localeCompare(b))
+        .map(([loc, meta]) => {
           return [
             '  <url>',
             `    <loc>${loc}</loc>`,
-            `    <lastmod>${now}</lastmod>`,
-            '    <changefreq>weekly</changefreq>',
-            `    <priority>${priority}</priority>`,
+            `    <lastmod>${meta.lastmod}</lastmod>`,
+            `    <changefreq>${meta.changefreq}</changefreq>`,
+            `    <priority>${meta.priority}</priority>`,
             '  </url>'
           ].join('\n')
         })
@@ -86,6 +91,7 @@ function createSsgOptions(): ViteSSGOptions {
       await fs.writeFile(resolve(outDir, 'sitemap.xml'), sitemap, 'utf8')
 
       const sitemapLine = `Sitemap: ${siteUrl}/sitemap.xml`
+      const blogSitemapLine = `Sitemap: ${siteUrl}/api/blog/sitemap.xml`
       const robotsPath = resolve(outDir, 'robots.txt')
       let robotsContent = ''
       try {
@@ -94,11 +100,10 @@ function createSsgOptions(): ViteSSGOptions {
         // ignore missing robots, will be created
       }
 
-      const updatedRobots = robotsContent
-        ? robotsContent.includes('Sitemap:')
-          ? robotsContent.replace(/Sitemap:[^\n]*/gi, sitemapLine)
-          : `${robotsContent.trim()}\n\n${sitemapLine}\n`
-        : `User-agent: *\nAllow: /\n\n${sitemapLine}\n`
+      const cleaned = robotsContent.replace(/Sitemap:[^\n]*/gi, '').trim()
+      const updatedRobots = cleaned
+        ? `${cleaned}\n\n${sitemapLine}\n${blogSitemapLine}\n`
+        : `User-agent: *\nAllow: /\n\n${sitemapLine}\n${blogSitemapLine}\n`
 
       await fs.writeFile(robotsPath, `${updatedRobots.trim()}\n`, 'utf8')
 

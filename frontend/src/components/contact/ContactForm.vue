@@ -9,6 +9,7 @@ interface ContactFormState {
   company: string
   message: string
   subscribe: boolean
+  privacy: boolean
 }
 
 const form = reactive<ContactFormState>({
@@ -17,7 +18,8 @@ const form = reactive<ContactFormState>({
   phone: '',
   company: '',
   message: '',
-  subscribe: true
+  subscribe: false,
+  privacy: false
 })
 
 const submitting = ref(false)
@@ -29,7 +31,8 @@ const fieldErrors = reactive<Record<keyof ContactFormState, string[]>>({
   phone: [],
   company: [],
   message: [],
-  subscribe: []
+  subscribe: [],
+  privacy: []
 })
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -42,6 +45,7 @@ const validate = () => {
   fieldErrors.company = []
   fieldErrors.message = []
   fieldErrors.subscribe = []
+  fieldErrors.privacy = []
 
   if (!form.name.trim()) {
     fieldErrors.name.push('Name is required')
@@ -69,6 +73,11 @@ const validate = () => {
     isValid = false
   }
 
+  if (!form.privacy) {
+    fieldErrors.privacy.push('Please confirm you have read the privacy policy')
+    isValid = false
+  }
+
   return isValid
 }
 
@@ -78,7 +87,8 @@ const resetForm = () => {
   form.phone = ''
   form.company = ''
   form.message = ''
-  form.subscribe = true
+  form.subscribe = false
+  form.privacy = false
 }
 
 const submit = async () => {
@@ -97,7 +107,8 @@ const submit = async () => {
       phone: form.phone,
       company: form.company,
       message: form.message,
-      subscribe_to_updates: form.subscribe
+      subscribe_to_updates: form.subscribe,
+      consent_privacy: form.privacy
     }
     const shouldSubscribe = form.subscribe
 
@@ -114,7 +125,9 @@ const submit = async () => {
 
       if (payload && typeof payload === 'object') {
         Object.entries(payload).forEach(([key, value]) => {
-          if (key in fieldErrors && Array.isArray(value)) {
+          if (key === 'consent_privacy' && Array.isArray(value)) {
+            fieldErrors.privacy = value.map(String)
+          } else if (key in fieldErrors && Array.isArray(value)) {
             fieldErrors[key as keyof ContactFormState] = value.map(String)
           }
         })
@@ -147,7 +160,8 @@ const submit = async () => {
         body: JSON.stringify({
           email: submissionPayload.email,
           name: submissionPayload.name,
-          source: 'contact_form'
+          source: 'contact_form',
+          consent: true
         })
       }).catch(() => {
         /* best effort */
@@ -222,6 +236,15 @@ const submit = async () => {
           label="Keep me posted on WebEssex launches and resources"
           density="compact"
         />
+        <div class="contact-form__privacy">
+          <VCheckbox
+            v-model="form.privacy"
+            label="I agree to the Privacy Policy"
+            density="compact"
+            :error-messages="fieldErrors.privacy"
+          />
+          <RouterLink to="/privacy">Read the Privacy Policy</RouterLink>
+        </div>
         <VBtn
           color="primary"
           type="submit"
@@ -324,6 +347,21 @@ const submit = async () => {
   gap: 1rem;
   align-items: center;
   justify-content: space-between;
+}
+
+.contact-form__privacy {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.contact-form__privacy a {
+  color: rgba(var(--v-theme-primary), 0.9);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.contact-form__privacy a:hover {
+  opacity: 0.8;
 }
 
 .contact-form__alert {

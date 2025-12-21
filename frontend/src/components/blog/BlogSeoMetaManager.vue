@@ -9,6 +9,7 @@ const props = defineProps<{
 
 const envSiteUrl = (import.meta.env.VITE_SITE_URL as string | undefined)?.trim()
 const SITE_URL = envSiteUrl ? envSiteUrl.replace(/\/+$/, '') : ''
+const organizationId = SITE_URL ? `${SITE_URL}/#organization` : undefined
 
 const resolveUrl = (path?: string) => {
   if (!path) return undefined
@@ -28,10 +29,14 @@ const headPayload = computed(() => {
   const canonical = resolveUrl(props.post.canonical_url || seo.canonical)
   const ogImage = resolveUrl(seo.ogImage)
   const keywords = seo.keywords?.join(', ')
+  const blogUrl = resolveUrl('/blog')
+  const homeUrl = resolveUrl('/')
+  const blogPostingId = canonical ? `${canonical}#blogposting` : undefined
 
-  const jsonLd = {
+  const blogPosting = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': 'BlogPosting',
+    '@id': blogPostingId,
     headline: seo.title,
     description: seo.description,
     image: ogImage ? [ogImage] : undefined,
@@ -40,10 +45,53 @@ const headPayload = computed(() => {
           '@type': 'Person',
           name: props.post.author.full_name
         }
-      : undefined,
+      : organizationId
+        ? { '@id': organizationId }
+        : { '@type': 'Organization', name: 'WebEssex' },
     datePublished: props.post.published_at,
     dateModified: props.post.published_at,
-    url: canonical
+    url: canonical,
+    mainEntityOfPage: canonical,
+    publisher: organizationId ? { '@id': organizationId } : { '@type': 'Organization', name: 'WebEssex' },
+    isPartOf: blogUrl
+      ? {
+          '@type': 'Blog',
+          name: 'WebEssex Blog',
+          url: blogUrl
+        }
+      : undefined,
+    keywords: keywords || undefined,
+    inLanguage: 'en-GB'
+  }
+
+  const breadcrumbItems = [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: homeUrl
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Blog',
+      item: blogUrl
+    }
+  ]
+
+  if (canonical) {
+    breadcrumbItems.push({
+      '@type': 'ListItem',
+      position: 3,
+      name: seo.title,
+      item: canonical
+    })
+  }
+
+  const breadcrumbList = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbItems.filter((item) => item.item)
   }
 
   return {
@@ -65,7 +113,8 @@ const headPayload = computed(() => {
     script: [
       {
         type: 'application/ld+json',
-        children: JSON.stringify(jsonLd)
+        key: 'blog-jsonld',
+        innerHTML: JSON.stringify([blogPosting, breadcrumbList])
       }
     ]
   }
