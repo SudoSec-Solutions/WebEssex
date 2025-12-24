@@ -9,7 +9,7 @@ const baseUrl =
 const organizationId = baseUrl ? `${baseUrl}/#organization` : undefined
 const localBusinessId = baseUrl ? `${baseUrl}/#localbusiness` : undefined
 const websiteId = baseUrl ? `${baseUrl}/#website` : undefined
-const logoUrl = baseUrl ? `${baseUrl}/WebEssexLogo.svg` : undefined
+const logoUrl = baseUrl ? `${baseUrl}/logo.png` : undefined
 
 const sameAs = [
   'https://www.linkedin.com/company/webessex/',
